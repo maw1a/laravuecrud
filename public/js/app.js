@@ -1969,6 +1969,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -2072,6 +2076,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return save;
+    }(),
+    deleteprofile: function () {
+      var _deleteprofile = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this2 = this;
+
+        var token;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                token = this.$cookie.get('token');
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:8080/api/user/delete', {
+                  token: token
+                }).then(function (res) {
+                  console.log('success: ', res.data.message);
+
+                  _this2.$cookie["delete"]('token');
+
+                  _this2.$router.push('/login');
+                })["catch"](function (err) {
+                  return console.log(err.message);
+                });
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function deleteprofile() {
+        return _deleteprofile.apply(this, arguments);
+      }
+
+      return deleteprofile;
     }()
   }
 });
@@ -6820,7 +6861,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container-page[data-v-0a0b5485] {\r\n    padding: 20px;\r\n    justify-self: center;\r\n    width: 40vw;\r\n    margin-left: auto;\r\n    margin-right: auto;\n}\n.btn-center[data-v-0a0b5485] {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.container-page[data-v-0a0b5485] {\r\n    padding: 20px;\r\n    justify-self: center;\r\n    width: 40vw;\r\n    margin-left: auto;\r\n    margin-right: auto;\n}\n.btn-center[data-v-0a0b5485] {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-direction: column;\n}\r\n", ""]);
 
 // exports
 
@@ -39756,12 +39797,12 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "btn-center mt-5" },
+            { staticClass: "btn-center mt-10" },
             [
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "primary" },
+                  attrs: { color: "primary", block: "" },
                   on: {
                     click: function() {
                       return _vm.save()
@@ -39772,6 +39813,32 @@ var render = function() {
                   _vm._v("\n                Save\n                "),
                   _c("v-icon", { attrs: { right: "", dark: "" } }, [
                     _vm._v("mdi-pencil")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "mt-10",
+                  attrs: {
+                    color: "error",
+                    large: "",
+                    block: "",
+                    rounded: "",
+                    outlined: ""
+                  },
+                  on: {
+                    click: function() {
+                      return _vm.deleteprofile()
+                    }
+                  }
+                },
+                [
+                  _vm._v("\n                Delete\n                "),
+                  _c("v-icon", { attrs: { right: "", dark: "" } }, [
+                    _vm._v("mdi-delete")
                   ])
                 ],
                 1

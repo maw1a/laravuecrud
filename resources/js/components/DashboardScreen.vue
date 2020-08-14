@@ -27,10 +27,14 @@
                 :value="userEmail"
                 @input="_=>userEmail=_"
             ></v-text-field>
-            <div class="btn-center mt-5">
-                <v-btn color="primary" @click="() => save()">
+            <div class="btn-center mt-10">
+                <v-btn color="primary" block @click="() => save()">
                     Save
                     <v-icon right dark>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn color="error" large block rounded outlined class="mt-10" @click="() => deleteprofile()">
+                    Delete
+                    <v-icon right dark>mdi-delete</v-icon>
                 </v-btn>
             </div>
         </div>
@@ -92,6 +96,16 @@ export default {
             }).then(res => {
                 console.log('success: ', res.data.message);
             }).catch(err => console.log(err.message));
+        },
+        deleteprofile: async function() {
+            var token = this.$cookie.get('token');
+            await axios.post('http://localhost:8080/api/user/delete', {
+                token
+            }).then(res => {
+                console.log('success: ', res.data.message);
+                this.$cookie.delete('token');
+                this.$router.push('/login');
+            }).catch(err => console.log(err.message));
         }
     }
 }
@@ -108,5 +122,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 </style>
